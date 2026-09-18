@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --accent: #14b8a6;
+      --bg: #f0fdfa;
+      --surface: #ffffff;
+      --text: #134e4a;
+      --space: 20px;
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #5eead4;
+        --accent: #2dd4bf;
+        --bg: #042f2e;
+        --surface: #115e59;
+        --text: #ccfbf1;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      padding: var(--space);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space);
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      padding: var(--space);
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card::before {
+      content: attr(data-icon);
+      display: block;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Features</h1>
+  <div class="grid">
+    <article class="card" data-icon="🚀"><h2>Fast</h2><p>Quick and simple.</p></article>
+    <article class="card" data-icon="🎨"><h2>Creative</h2><p>Made with style.</p></article>
+    <article class="card" data-icon="🔒"><h2>Secure</h2><p>Built for safety.</p></article>
+  </div>
+</body>
+</html>

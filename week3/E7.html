@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --accent: #14b8a6;
+      --bg: #f0fdfa;
+      --surface: #ffffff;
+      --text: #134e4a;
+      --muted: #52716e;
+      --nav: #1e293b;
+      --space: 16px;
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #5eead4;
+        --accent: #2dd4bf;
+        --bg: #042f2e;
+        --surface: #115e59;
+        --text: #ccfbf1;
+        --muted: #99f6e4;
+        --nav: #0f172a;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      box-sizing: border-box;
+      padding: var(--space);
+      background: var(--nav);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .hero {
+      padding: 140px var(--space) 100px;
+      text-align: center;
+      animation: fade-in 1s ease;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--primary);
+      font-size: clamp(36px, 8vw, 64px);
+    }
+
+    .hero p {
+      color: var(--muted);
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .skills {
+      padding: var(--space);
+    }
+
+    .skills h2 {
+      position: sticky;
+      top: 50px;
+      margin: 0 0 var(--space);
+      padding: var(--space) 0;
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space);
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      padding: var(--space);
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card::before {
+      content: attr(data-icon);
+      display: block;
+      font-size: 28px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px var(--accent);
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#home">Maya Patel</a>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <h1>Maya Patel</h1>
+    <p>Computer Science major and web developer.</p>
+  </header>
+
+  <main class="skills" id="skills">
+    <h2>My Skills</h2>
+    <div class="grid">
+      <article class="card" data-icon="💻"><h3>Web Development</h3><p>Accessible, responsive websites.</p></article>
+      <article class="card" data-icon="🐍"><h3>Python</h3><p>Clean scripts and useful automation.</p></article>
+      <article class="card" data-icon="🗄️"><h3>Databases</h3><p>Organized data with SQL.</p></article>
+      <article class="card" data-icon="🎨"><h3>UI Design</h3><p>Simple interfaces people enjoy using.</p></article>
+      <article class="card" data-icon="🔧"><h3>Git</h3><p>Clear, collaborative version control.</p></article>
+      <article class="card" data-icon="🤝"><h3>Teamwork</h3><p>Curious, thoughtful collaboration.</p></article>
+    </div>
+  </main>
+</body>
+</html>
