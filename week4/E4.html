@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Search Filter</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    .panel {
+      width: 480px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      padding: 24px;
+    }
+
+    h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+
+    .student-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .student {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .highlight {
+      background: #fef3c7;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h2>Student Directory</h2>
+    <input id="searchInput" type="text" placeholder="Search student name..." />
+
+    <div class="student-list">
+      <div class="student"><span class="name">Khanal Binod</span></div>
+      <div class="student"><span class="name">Silwal Saiman</span></div>
+      <div class="student"><span class="name">Khadka Anil</span></div>
+      <div class="student"><span class="name">Pandey Aayush</span></div>
+      <div class="student"><span class="name">Thapa Mohan</span></div>
+      <div class="student"><span class="name">sushant</span></div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.querySelector('#searchInput');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      const students = document.querySelectorAll('.student');
+
+      students.forEach((student) => {
+        const nameEl = student.querySelector('.name');
+        const name = nameEl.textContent.toLowerCase();
+        const matched = name.includes(term);
+
+        if (matched) {
+          student.style.display = 'block';
+
+          if (term) {
+            const safeName = nameEl.textContent;
+            const highlighted = safeName.replace(
+              new RegExp(`(${term})`, 'gi'),
+              '<span class="highlight">$1</span>'
+            );
+            nameEl.innerHTML = highlighted;
+          } else {
+            nameEl.textContent = nameEl.textContent;
+          }
+        } else {
+          student.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

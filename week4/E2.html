@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Card Toggle</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    .profile-card {
+      width: 320px;
+      padding: 24px;
+      border-radius: 18px;
+      background: #ffffff;
+      color: #111827;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .profile-card.dark {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .profile-pic {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+    }
+
+    p {
+      margin: 0 0 18px;
+      line-height: 1.5;
+    }
+
+    .toggle-btn {
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card" id="profileCard">
+    <div class="profile-pic">J</div>
+    <h2>Jane Doe</h2>
+    <p>Creative designer and front-end developer building clean digital experiences.</p>
+    <button class="toggle-btn" id="toggleBtn">Dark Mode</button>
+  </div>
+
+  <script>
+    const card = document.querySelector('#profileCard');
+    const toggleBtn = document.querySelector('#toggleBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      card.classList.toggle('dark');
+
+      if (card.classList.contains('dark')) {
+        toggleBtn.textContent = 'Light Mode';
+      } else {
+        toggleBtn.textContent = 'Dark Mode';
+      }
+    });
+  </script>
+</body>
+</html>
