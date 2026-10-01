@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f1">
+  <meta name="description" content="Aswin Khanal's public archive of weekly work and project folders.">
+  <title>Aswin Khanal | Project Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f6f1;
+      --ink: #19211e;
+      --muted: #68716d;
+      --line: #dce1da;
+      --green: #c6f36b;
+      --coral: #ef7557;
+      --white: #fff;
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: radial-gradient(#c8cec6 0.65px, transparent 0.65px);
+      background-size: 18px 18px;
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .top-note, .eyebrow, .section-index, .folder-meta, .status, .footer-note {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .top-note { color: var(--muted); font-size: 11px; }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 48px;
+      align-items: end;
+      padding: 76px 0 55px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+      content: "";
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 0;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.99;
+      font-weight: 600;
+    }
+
+    h1 span {
+      display: inline-block;
+      position: relative;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    h1 span::after {
+      position: absolute;
+      z-index: -1;
+      right: -5px;
+      bottom: 4px;
+      left: -5px;
+      height: 18px;
+      background: var(--green);
+      content: "";
+      transform: rotate(-1deg);
+    }
+
+    .intro-aside {
+      padding: 0 0 4px 18px;
+      border-left: 1px solid var(--line);
+    }
+
+    .intro-aside p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .count {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+    }
+
+    .count strong { font-size: 28px; font-weight: 600; }
+    .count span { color: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 0;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toolbar-label { margin: 0; font-size: 13px; font-weight: 700; }
+
+    .search-wrap {
+      width: min(300px, 48%);
+      position: relative;
+    }
+
+    .search-wrap::before {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      width: 11px;
+      height: 11px;
+      border: 1.5px solid var(--muted);
+      border-radius: 50%;
+      content: "";
+      transform: translateY(-60%);
+    }
+
+    .search-wrap::after {
+      position: absolute;
+      top: 56%;
+      left: 23px;
+      width: 5px;
+      height: 1.5px;
+      background: var(--muted);
+      content: "";
+      transform: rotate(45deg);
+      transform-origin: left;
+    }
+
+    #folder-search {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px 0 35px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--ink);
+      font: 12px var(--sans);
+    }
+
+    #folder-search:focus-visible, a:focus-visible {
+      outline: 2px solid #347d55;
+      outline-offset: 3px;
+    }
+
+    .folder-section { padding: 42px 0 8px; }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .section-index { color: var(--coral); font-size: 11px; }
+    .section-heading h2 { margin: 0; font-size: 20px; font-weight: 700; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .folder-card {
+      min-height: 168px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 17px 17px 14px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+      transition: background-color 160ms ease, transform 160ms ease;
+    }
+
+    .folder-card[hidden] { display: none; }
+
+    a.folder-card:hover {
+      background: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .folder-card.is-unlinked { cursor: default; }
+
+    .folder-card-top, .folder-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .folder-icon {
+      width: 29px;
+      height: 23px;
+      position: relative;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+    }
+
+    .folder-icon::before {
+      width: 11px;
+      height: 4px;
+      position: absolute;
+      top: -5px;
+      left: 2px;
+      border: 1.5px solid var(--ink);
+      border-bottom: 0;
+      border-radius: 2px 2px 0 0;
+      content: "";
+    }
+
+    .folder-meta { color: var(--muted); font-size: 10px; }
+    .folder-card h3 { margin: 15px 0 auto; font-size: 17px; font-weight: 700; }
+    .status { color: var(--muted); font-size: 9px; }
+
+    .arrow {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 30px 0 60px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 58px;
+      padding: 18px 0 25px;
+      border-top: 1px solid var(--ink);
+    }
+
+    .footer-note { margin: 0; color: var(--muted); font-size: 10px; }
+
+    @media (max-width: 760px) {
+      .intro { grid-template-columns: 1fr; gap: 28px; padding: 58px 0 38px; }
+      .intro-aside { max-width: 420px; }
+      .folder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 460px) {
+      .page-shell { width: min(100% - 32px, 1120px); }
+      .topbar { min-height: 64px; }
+      .top-note { max-width: 140px; text-align: right; line-height: 1.5; }
+      .toolbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .search-wrap { width: 100%; }
+      .folder-grid { grid-template-columns: 1fr; }
+      .folder-card { min-height: 135px; }
+      .section-heading { flex-wrap: wrap; gap: 8px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Aswin Khanal home">
+        <span class="brand-mark" aria-hidden="true">A.</span>
+        <span>ASWIN KHANAL</span>
+      </a>
+      <span class="top-note">A public index of work</span>
+    </header>
+
+    <main id="top">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">WORK IN PROGRESS / OPEN ACCESS</p>
+          <h1 id="page-title">Four weeks.<br><span>One archive.</span></h1>
+        </div>
+        <aside class="intro-aside">
+          <p>Browse weekly work and standalone folders. Each linked folder opens its files on GitHub.</p>
+          <div class="count" aria-live="polite">
+            <strong id="linked-count">0</strong>
+            <span>of 8 folders linked</span>
+          </div>
+        </aside>
+      </section>
+
+      <section aria-label="Folder directory">
+        <div class="toolbar">
+          <p class="toolbar-label">Browse the folders</p>
+          <div class="search-wrap">
+            <label for="folder-search" class="visually-hidden">Search folders</label>
+            <input id="folder-search" type="search" placeholder="Search folders" autocomplete="off">
+          </div>
+        </div>
+
+        <section class="folder-section" aria-labelledby="weeks-title">
+          <div class="section-heading">
+            <span class="section-index">01</span>
+            <h2 id="weeks-title">Weekly folders</h2>
+            <p>Four weeks of work</p>
+          </div>
+          <div class="folder-grid" id="weekly-folders"></div>
+        </section>
+
+        <section class="folder-section" aria-labelledby="collections-title">
+          <div class="section-heading">
+            <span class="section-index">02</span>
+            <h2 id="collections-title">Other folders</h2>
+            <p>Standalone collections</p>
+          </div>
+          <div class="folder-grid" id="other-folders"></div>
+        </section>
+        <p class="empty-state" id="empty-state">No folders match that search.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p class="footer-note">ASWIN KHANAL / 2026</p>
+      <p class="footer-note">PUBLIC FOLDER LINKS</p>
+    </footer>
+  </div>
+
+  <script>
+    // Replace each empty url with the matching public GitHub folder link.
+    const weeklyFolders = [
+      { name: "Week 01", url: "https://github.com/aswin-wq/web-programming/tree/main/week1" },
+      { name: "Week 02", url: "https://github.com/aswin-wq/web-programming/tree/main/week2" },
+      { name: "Week 03", url: "https://github.com/aswin-wq/web-programming/tree/main/week3" },
+      { name: "Week 04", url: "https://github.com/aswin-wq/web-programming/tree/main/week4" }
+    ];
+
+    const otherFolders = [
+      { name: "Folder 01", url: "" },
+      { name: "Folder 02", url: "" },
+      { name: "Folder 03", url: "" },
+      { name: "Folder 04", url: "" }
+    ];
+
+    const allFolders = [...weeklyFolders, ...otherFolders];
+    const linkedCount = allFolders.filter((folder) => folder.url).length;
+    document.querySelector("#linked-count").textContent = linkedCount;
+
+    function renderFolders(folders, containerId, groupLabel) {
+      const container = document.getElementById(containerId);
+      container.replaceChildren(...folders.map((folder, index) => {
+        const card = document.createElement(folder.url ? "a" : "div");
+        card.className = `folder-card${folder.url ? "" : " is-unlinked"}`;
+        card.dataset.search = `${folder.name} ${groupLabel}`.toLowerCase();
+        if (folder.url) {
+          card.href = folder.url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.setAttribute("aria-label", `${folder.name}, opens on GitHub in a new tab`);
+        }
+
+        const top = document.createElement("div");
+        top.className = "folder-card-top";
+        const icon = document.createElement("span");
+        icon.className = "folder-icon";
+        icon.setAttribute("aria-hidden", "true");
+        const number = document.createElement("span");
+        number.className = "folder-meta";
+        number.textContent = `${groupLabel} / ${String(index + 1).padStart(2, "0")}`;
+        top.append(icon, number);
+
+        const title = document.createElement("h3");
+        title.textContent = folder.name;
+
+        const bottom = document.createElement("div");
+        bottom.className = "folder-card-bottom";
+        const status = document.createElement("span");
+        status.className = "status";
+        status.textContent = folder.url ? "Open folder" : "Link to be added";
+        bottom.append(status);
+        if (folder.url) {
+          const arrow = document.createElement("span");
+          arrow.className = "arrow";
+          arrow.setAttribute("aria-hidden", "true");
+          arrow.textContent = "↗";
+          bottom.append(arrow);
+        }
+
+        card.append(top, title, bottom);
+        return card;
+      }));
+    }
+
+    renderFolders(weeklyFolders, "weekly-folders", "week");
+    renderFolders(otherFolders, "other-folders", "folder");
+
+    document.querySelector("#folder-search").addEventListener("input", (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      const cards = [...document.querySelectorAll(".folder-card")];
+      let visibleCards = 0;
+
+      for (const card of cards) {
+        const matches = card.dataset.search.includes(query);
+        card.hidden = !matches;
+        if (matches) visibleCards += 1;
+      }
+
+      document.querySelector("#empty-state").style.display = visibleCards ? "none" : "block";
+    });
+  </script>
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</body>
+</html>
